@@ -27,3 +27,30 @@ body {
 .cell {
     border: 1px solid black;
 }
+
+.cell.black::after {
+    content: "";
+    display: block;
+
+    width: 80%;
+    height: 80%;
+
+    margin: 10% auto;
+
+    border-radius: 50%;
+    border: 1px solid black;
+    background-color: black;
+}
+.cell.white::after {
+    content: "";
+    display: block;
+
+    width: 80%;
+    height: 80%;
+
+    margin: 10% auto;
+
+    border: 1px solid black;
+    border-radius: 50%;
+    background-color: white;
+}
