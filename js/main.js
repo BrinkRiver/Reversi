@@ -1,8 +1,10 @@
 import { Board, BOARD_SIZE } from "./board.js";
+import { Game } from "./game.js"
 
 const boardElement = document.querySelector("#board");
 
 const board = new Board();
+const game = new Game(board);
 
 for (let row = 0; row < BOARD_SIZE; row++) {
     for (let column = 0; column < BOARD_SIZE; column++) {
@@ -16,10 +18,10 @@ for (let row = 0; row < BOARD_SIZE; row++) {
             const row = Number(event.currentTarget.dataset.row);
             const column = Number(event.currentTarget.dataset.column);
 
-            board.placeDisk(row, column, "black");
-
-            renderBoard();
-        })
+           if (game.play(row, column)) {
+                renderBoard();
+           }
+        });
         boardElement.appendChild(cell);
     }
 }
