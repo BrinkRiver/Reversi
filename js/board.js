@@ -31,4 +31,8 @@ export class Board {
         this.cells[center    ][center - 1] = "black";
         this.cells[center    ][center] = "white";
     }
+
+    placeDisk(row, column, color) {
+        this.cells[row][column] = color;
+    }
 }

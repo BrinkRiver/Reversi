@@ -9,6 +9,17 @@ for (let row = 0; row < BOARD_SIZE; row++) {
         const cell = document.createElement("div");
         cell.classList.add("cell");
 
+        cell.dataset.row = row;
+        cell.dataset.column = column;
+
+        cell.addEventListener("click", (event) => {
+            const row = Number(event.currentTarget.dataset.row);
+            const column = Number(event.currentTarget.dataset.column);
+
+            board.placeDisk(row, column, "black");
+
+            renderBoard();
+        })
         boardElement.appendChild(cell);
     }
 }
@@ -20,6 +31,8 @@ function renderBoard() {
         for (let column = 0; column < board.cells[row].length; column++) {
             const index = row * board.cells[row].length + column;
             const cell = cells[index];
+
+            cell.classList.remove("black", "white");
 
             const disk = board.cells[row][column];
 
