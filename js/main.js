@@ -5,6 +5,7 @@ const boardElement = document.querySelector("#board");
 const turnElement = document.querySelector("#turn");
 const blackCountElement = document.querySelector("#black-count");
 const whiteCountElement = document.querySelector("#white-count")
+const resetButton = document.querySelector("#reset-button");
 
 const board = new Board();
 const game = new Game(board);
@@ -29,6 +30,16 @@ for (let row = 0; row < BOARD_SIZE; row++) {
     }
 }
 
+resetButton.addEventListener("click", () => {
+    game.reset();
+    render();
+})
+
+render();
+
+// ---------------------
+// Function s
+// ---------------------
 function renderBoard() {
     const cells = boardElement.querySelectorAll(".cell");
 
@@ -70,5 +81,3 @@ function render() {
     renderTurn();
     renderDiskCount();
 }
-
-render();

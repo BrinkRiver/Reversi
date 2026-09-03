@@ -121,3 +121,22 @@ body {
     border-radius: 50%;
     background-color: white;
 }
+
+#reset-button {
+    display: block;
+    margin: 20px auto 0;
+    padding: 10px 24px;
+
+    border: none;
+    border-radius: 8px;
+
+    background-color: #555;
+    color: white;
+
+    font-size: 14px;
+    cursor: pointer;
+}
+
+#reset-button:hover {
+    background-color: #333;
+}

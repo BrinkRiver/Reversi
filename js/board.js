@@ -14,15 +14,15 @@ const DIRECTIONS = [
 export class Board {
 
     constructor() {
+        this.setupInitialPosition();
+    }
+
+    setupInitialPosition() {
         this.cells = Array.from(
             { length: BOARD_SIZE },
             () => Array(BOARD_SIZE).fill(null)
         );
 
-        this.setupInitialPosition();
-    }
-
-    setupInitialPosition() {
         const center = BOARD_SIZE / 2;
 
         this.cells[center - 1][center - 1] = "white";
@@ -110,5 +110,9 @@ export class Board {
             black: cells.filter(cell => cell === "black").length,
             white: cells.filter(cell => cell === "white").length,
         };
+    }
+
+    reset() {
+        this.setupInitialPosition();
     }
 }

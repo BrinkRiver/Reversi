@@ -23,4 +23,9 @@ export class Game {
             this.currentPlayer = "black";
         }
     }
+
+    reset() {
+        this.board.reset();
+        this.currentPlayer = "black";
+    }
 }
