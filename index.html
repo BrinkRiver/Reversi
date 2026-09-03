@@ -16,19 +16,25 @@
     <main>
         <section>
             <div class="game">
-                <div class="player">
-                    <span>Black</span>
-                    <span id=""black-count>2</span>
-                </div>
+                <div class="game-info">
+                    <div class="turn-info">
+                        <span class="label">Turn</span>
+                        <span id="turn" class="current-player"></span>
+                    </div>
 
-                <div class="turn">
-                    <span>Turn:</span>
-                    <span id="current-player">Black</span>
-                </div>
+                    <div class="disk-count">
+                        <div class="player black-player">
+                            <span class="disk-symbol">●</span>
+                            <span>Black</span>
+                            <span id="black-count" class="count"></span>
+                        </div>
 
-                <div class="player">
-                    <span>White</span>
-                    <span id=""black-count>2</span>
+                        <div class="player white-player">
+                            <span class="disk-symbol">●</span>
+                            <span>White</span>
+                            <span id="white-count" class="count"></span>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -37,7 +43,6 @@
             </div>
 
             <div class="game-controls">
-                <button id="pass-button" type="button">Pass</button>
                 <button id="pass-button" type="button">Restart</button>
             </div>
         </section>

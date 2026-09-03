@@ -97,4 +97,18 @@ export class Board {
 
         return disksToFlip;
     }
+
+    countDisks() {
+        const cells = this.cells.flat();
+
+
+        const whiteCount = cells.filter(
+            cell => cell === "white"
+        ).length;
+
+        return {
+            black: cells.filter(cell => cell === "black").length,
+            white: cells.filter(cell => cell === "white").length,
+        };
+    }
 }

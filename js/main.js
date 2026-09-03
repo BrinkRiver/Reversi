@@ -2,6 +2,9 @@ import { Board, BOARD_SIZE } from "./board.js";
 import { Game } from "./game.js"
 
 const boardElement = document.querySelector("#board");
+const turnElement = document.querySelector("#turn");
+const blackCountElement = document.querySelector("#black-count");
+const whiteCountElement = document.querySelector("#white-count")
 
 const board = new Board();
 const game = new Game(board);
@@ -18,9 +21,9 @@ for (let row = 0; row < BOARD_SIZE; row++) {
             const row = Number(event.currentTarget.dataset.row);
             const column = Number(event.currentTarget.dataset.column);
 
-           if (game.play(row, column)) {
-                renderBoard();
-           }
+            if (game.play(row, column)) {
+                render();
+            }
         });
         boardElement.appendChild(cell);
     }
@@ -46,6 +49,26 @@ function renderBoard() {
             }
         }
     }
-    console.log(board.cells);
 }
-renderBoard();
+
+function renderTurn() {
+    const player = 
+        game.currentPlayer.charAt(0).toUpperCase()
+        + game.currentPlayer.slice(1);
+    turnElement.textContent = `${player}`;
+}
+
+function renderDiskCount() {
+    const counts = board.countDisks();
+
+    blackCountElement.textContent = counts.black;
+    whiteCountElement.textContent = counts.white;
+}
+
+function render() {
+    renderBoard();
+    renderTurn();
+    renderDiskCount();
+}
+
+render();

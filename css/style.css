@@ -13,6 +13,73 @@ body {
     align-items: center;
 }
 
+.game-info {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto 20px;
+    padding: 16px 20px;
+
+    background-color: #e5e5e5;
+    border-radius: 12px;
+}
+
+.turn-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+
+    margin-bottom: 16px;
+}
+
+.label {
+    font-size: 14px;
+    color: #666;
+}
+
+.current-player {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.disk-count {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+
+.player {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    font-size: 16px;
+}
+
+.disk-symbol {
+    font-size: 20px;
+}
+
+.black-player .disk-symbol {
+    color: #111;
+}
+
+.white-player .disk-symbol {
+    color: #fff;
+    text-shadow:
+        0 0 0 #111
+        1px 0 0 #111
+        -1px 0 0 #111
+        0 -1px 0 #111
+        0 -1px 0 #111
+}
+
+.count {
+    min-width: 24px;
+    font-weight: bold;
+    text-align: center;
+}
+
 .board {
     width: min(80vw, 600px);
     aspect-ratio: 1;
