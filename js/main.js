@@ -5,6 +5,7 @@ const boardElement = document.querySelector("#board");
 const turnElement = document.querySelector("#turn");
 const blackCountElement = document.querySelector("#black-count");
 const whiteCountElement = document.querySelector("#white-count")
+const gameMessageElement = document.querySelector("#game-message");
 const resetButton = document.querySelector("#reset-button");
 
 const board = new Board();
@@ -22,11 +23,18 @@ for (let row = 0; row < BOARD_SIZE; row++) {
             const row = Number(event.currentTarget.dataset.row);
             const column = Number(event.currentTarget.dataset.column);
 
-            if (game.play(row, column)) {
-                cell.classList.remove("preview-black", "preview-white");
-                render();
+            const result = game.play(row, column);
+
+            if (!result.success) {
+                return;
             }
+
+            cell.classList.remove("preview-black", "preview-white");
+
+            render();
+            renderGameStatus(result);
         });
+
         cell.addEventListener("mouseenter", () => {
             const row = Number(cell.dataset.row);
             const column = Number(cell.dataset.column);
@@ -46,6 +54,8 @@ for (let row = 0; row < BOARD_SIZE; row++) {
 
 resetButton.addEventListener("click", () => {
     game.reset();
+    gameMessageElement.textContent = "";
+    gameMessageElement.style.display = "none";
     render();
 })
 
@@ -90,6 +100,26 @@ function renderDiskCount() {
     whiteCountElement.textContent = counts.white;
 }
 
+function renderGameStatus(result) {
+    if (result.status === "pass") {
+        gameMessageElement.textContent =
+            `${result.player} has no valid moves.`;
+    }
+
+    if (result.status === "gameover") {
+        const counts = board.countDisks();
+
+        if (counts.black > counts.white) {
+            gameMessageElement.textContent = "Black wins!";
+        } else if (counts.white > counts.black) {
+            gameMessageElement.textContent = "white wins!";
+        } else {
+            gameMessageElement.textContent = "Draw!";
+        }
+
+        gameMessageElement.style.display = "block";
+    }
+}
 function render() {
     renderBoard();
     renderTurn();

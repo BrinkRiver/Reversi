@@ -55,7 +55,8 @@ export class Board {
     }
 
     isValidMove(row, column, color) {
-        return this.getFlippableDisks(row, column, color).length > 0;
+        return (this.isEmpty(row, column)
+                && this.getFlippableDisks(row, column, color).length > 0)
     }
 
     getOpponent(color) {
@@ -114,5 +115,17 @@ export class Board {
 
     reset() {
         this.setupInitialPosition();
+    }
+
+    remainValidMove(color) {
+        for (let row = 0; row < BOARD_SIZE; row++) {
+            for (let column = 0; column < BOARD_SIZE; column++) {
+                if (this.isValidMove(row, column, color)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 }

@@ -2,31 +2,58 @@ export class Game {
     constructor(board) {
         this.board = board;
         this.currentPlayer = "black";
+        this.gameOver = false;
     }
 
     play(row, column) {
+        if (this.gameOver) {
+            return { success: false};
+        }
+
         if (!this.board.isValidMove(row, column, this.currentPlayer)) {
-            return false;
+            return { success: false};
         }
 
         this.board.placeDisk(row, column, this.currentPlayer);
 
-        this.switchPlayer();
+        const nextPlayer = this.getNextPlayer();
 
-        return true;
+        if (this.board.remainValidMove(nextPlayer)) {
+            this.currentPlayer = nextPlayer;
+            return {
+                success: true,
+                status: "normal",
+            }
+        }
+
+        if (this.board.remainValidMove(this.currentPlayer)) {
+            return {
+                success: true,
+                status: pass,
+                player: nextPlayer
+            }
+        }
+
+        this.gameOver = true;
+
+        return {
+            success: true,
+            status: "gameover",
+        }
     }
 
-    switchPlayer() {
+    getNextPlayer() {
         if (this.currentPlayer === "black") {
-            this.currentPlayer = "white";
+            return "white";
         } else {
-            this.currentPlayer = "black";
+            return "black";
         }
     }
 
     reset() {
         this.board.reset();
         this.currentPlayer = "black";
+        this.gameOver = false;
     }
 
     isValidMove(row, column) {
