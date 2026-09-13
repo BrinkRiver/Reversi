@@ -28,4 +28,16 @@ export class Game {
         this.board.reset();
         this.currentPlayer = "black";
     }
+
+    isValidMove(row, column) {
+        return this.board.isValidMove(
+            row,
+            column,
+            this.currentPlayer
+        )
+    }
+
+    canPlace(row, column) {
+        return this.board.isEmpty(row, column);
+    }
 }

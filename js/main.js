@@ -23,9 +23,23 @@ for (let row = 0; row < BOARD_SIZE; row++) {
             const column = Number(event.currentTarget.dataset.column);
 
             if (game.play(row, column)) {
+                cell.classList.remove("preview-black", "preview-white");
                 render();
             }
         });
+        cell.addEventListener("mouseenter", () => {
+            const row = Number(cell.dataset.row);
+            const column = Number(cell.dataset.column);
+
+            if (game.canPlace(row, column)) {
+                if (game.isValidMove(row, column)) {
+                    cell.classList.add(`preview-${game.currentPlayer}`);
+                }
+            }
+        })
+        cell.addEventListener("mouseleave", () => {
+            cell.classList.remove("preview-black", "preview-white");
+        })
         boardElement.appendChild(cell);
     }
 }
@@ -38,7 +52,7 @@ resetButton.addEventListener("click", () => {
 render();
 
 // ---------------------
-// Function s
+// Functions
 // ---------------------
 function renderBoard() {
     const cells = boardElement.querySelectorAll(".cell");
