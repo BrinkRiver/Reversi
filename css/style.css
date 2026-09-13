@@ -93,6 +93,21 @@ body {
 
 .cell {
     border: 1px solid black;
+    cursor: none;
+    position: relative;
+}
+
+.cell:hover::before {
+    content: "";
+    position: absolute;
+    width: 70%;
+    height: 70%;
+    border-radius: 50%;
+    background-color: #00000090;
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .cell.black::after {
