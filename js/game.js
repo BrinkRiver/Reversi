@@ -1,17 +1,32 @@
+import { PLAYER } from "./board.js";
+
+export const GAME_STATUS = {
+    NORMAL: "normal",
+    PASS: "pass",
+    GAME_OVER: "gameover",
+    INVALID: "invalid",
+};
+
 export class Game {
     constructor(board) {
         this.board = board;
-        this.currentPlayer = "black";
+        this.currentPlayer = PLAYER.BLACK;
         this.gameOver = false;
     }
 
     play(row, column) {
         if (this.gameOver) {
-            return { success: false};
+            return {
+                status: GAME_STATUS.INVALID,
+                player: this.currentPlayer,
+            };
         }
 
         if (!this.board.isValidMove(row, column, this.currentPlayer)) {
-            return { success: false};
+            return {
+                status: GAME_STATUS.INVALID,
+                player: this.currentPlayer,
+            };
         }
 
         this.board.placeDisk(row, column, this.currentPlayer);
@@ -21,47 +36,42 @@ export class Game {
         if (this.board.remainValidMove(nextPlayer)) {
             this.currentPlayer = nextPlayer;
             return {
-                success: true,
-                status: "normal",
-            }
+                status: GAME_STATUS.NORMAL,
+                player: this.currentPlayer,
+            };
         }
 
         if (this.board.remainValidMove(this.currentPlayer)) {
             return {
-                success: true,
-                status: pass,
-                player: nextPlayer
-            }
+                status: GAME_STATUS.PASS,
+                player: nextPlayer,
+            };
         }
 
         this.gameOver = true;
 
         return {
-            success: true,
-            status: "gameover",
-        }
+            status: GAME_STATUS.GAME_OVER,
+            player: nextPlayer,
+        };
     }
 
     getNextPlayer() {
-        if (this.currentPlayer === "black") {
-            return "white";
+        if (this.currentPlayer === PLAYER.BLACK) {
+            return PLAYER.WHITE;
         } else {
-            return "black";
+            return PLAYER.BLACK;
         }
     }
 
     reset() {
         this.board.reset();
-        this.currentPlayer = "black";
+        this.currentPlayer = PLAYER.BLACK;
         this.gameOver = false;
     }
 
     isValidMove(row, column) {
-        return this.board.isValidMove(
-            row,
-            column,
-            this.currentPlayer
-        )
+        return this.board.isValidMove(row, column, this.currentPlayer);
     }
 
     canPlace(row, column) {
