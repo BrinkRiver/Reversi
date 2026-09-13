@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Reversi</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Reversi</h1>
+    </header>
+
+    <main>
+        <div class="game-info">
+            <div class="turn-info">
+                <span class="label">Turn</span>
+                <span id="turn" class="current-player"></span>
+            </div>
+
+            <div class="disk-count">
+                <div class="player black-player">
+                    <span class="disk-symbol">●</span>
+                    <span>Black</span>
+                    <span id="black-count" class="count"></span>
+                </div>
+
+                <div class="player white-player">
+                    <span class="disk-symbol">●</span>
+                    <span>White</span>
+                    <span id="white-count" class="count"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="board-container">
+            <div id="board" class="board"></div>
+            <div id="game-message"></div>
+        </div>
+
+        <div class="game-controls">
+            <button id="reset-button" type="button">Restart</button>
+        </div>
+    </main>
+
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
